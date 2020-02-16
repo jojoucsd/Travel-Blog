@@ -1,8 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    siteUrl: 'https://ling-travel-blog.netlify.com/',
+    title: `Ling's Travel Blog`,
+    description: `Travel Blog build with Gatsby frontend and Strapi backend`,
+    author: `@LingLu`,
+    mapboxToken: 'pk.eyJ1Ijoiam9qb2xldG8iLCJhIjoiY2s2bnpvcHJ5MTYzdTNscWY1ZzhwN3B0dCJ9.E6pSkuWSetSHum1oANhlWA',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -37,7 +39,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/ling-icon.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
