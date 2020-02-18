@@ -13,7 +13,7 @@ const blogStyle={
 
 const Header = ({ siteTitle, content }) => (
   <header
-    style={content == 'map' ? mapStyle: blogStyle}
+    style={content === 'map' ? mapStyle: blogStyle}
   >
     <div
       style={{

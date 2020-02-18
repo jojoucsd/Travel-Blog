@@ -30,7 +30,7 @@ const Layout = ({ children, content }) => {
     <>
       <Header siteTitle={data.site.siteMetadata.title} content={content}/>
       <div
-        style={content =='map' ? mapStyle : blogStyle }
+        style={content ==='map' ? mapStyle : blogStyle }
       >
         <main>{children}</main>
         <footer>
