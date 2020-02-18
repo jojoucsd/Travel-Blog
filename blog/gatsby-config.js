@@ -4,7 +4,7 @@ module.exports = {
     title: `Ling's Travel Blog`,
     description: `Travel Blog build with Gatsby frontend and Strapi backend`,
     author: `@LingLu`,
-    mapboxToken: 'pk.eyJ1Ijoiam9qb2xldG8iLCJhIjoiY2s2bnpvcHJ5MTYzdTNscWY1ZzhwN3B0dCJ9.E6pSkuWSetSHum1oANhlWA',
+    mapboxToken: process.env.MAPBOX_API_TOKEN,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,7 +20,7 @@ module.exports = {
       options: {
         apiURL: process.env.DEPLOY_URL
         ? 'https://family-travel-blog.herokuapp.com'
-        : 'http://localhost:1337',
+        : process.env.LOCAL_HOST,
         contentTypes: [
           `article`,
           `user`,
@@ -28,6 +28,7 @@ module.exports = {
         queryLimit: 1000,
       }
     },
+    'gatsby-plugin-antd',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -41,7 +42,7 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/ling-icon.png`, // This path is relative to the root of the site.
       },
-    },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
