@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React , {useState, useEffect} from 'react'
 import Layout from '../components/layout'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
@@ -6,11 +6,16 @@ import { Avatar, Badge } from 'antd';
 import { Link, graphql } from 'gatsby'
 import fakeData from 'fakeData'
 import 'mapbox-gl/dist/mapbox-gl.css';
+
 // import Map from '../components/map'
 
+
 const IndexPage = ({ data }) => {
+  const {allStrapiArticle} = data
+  // const {edges} = allStrapiArticle
   const {sanFran} = fakeData
   const [showPopup, setShowPopup] = useState({})
+  const place = 'San Francisco'
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -21,6 +26,27 @@ const IndexPage = ({ data }) => {
     zoom: sanFran.zoom
   });
 
+  useEffect (() => {
+    //mapbox geocoding
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?limit=1&access_token=${siteMetadata.mapboxToken}`)
+    .then(response => response.json())
+    .then(resultData => {
+      let geoCenter = resultData.features[0].center
+      fetch('http://localhost:1337/articles/1',{
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ geolocation: { lat: geoCenter[1] , lng:geoCenter[0]} }),
+        json: true 
+      })
+      .then(response => response.json())
+      .then(resultUpdated=>{
+        console.log(resultUpdated)
+      })
+    }, [])
+  })
   return(
   <Layout content={'map'}>
    <ReactMapGL
@@ -29,8 +55,8 @@ const IndexPage = ({ data }) => {
       {...viewport}
       onViewportChange={setViewport}
    >
-     {data.allStrapiArticle.edges.map(document =>(
-       <React.Fragment key={document.node.id}>
+         { data.allStrapiArticle.edges.map(document =>(
+      <React.Fragment key={document.node.id}>
          <Marker
           latitude={37.7749}
           longitude= {-122.4194}
@@ -67,7 +93,7 @@ const IndexPage = ({ data }) => {
              </Popup>
            ):null
          }
-       </React.Fragment>
+      </React.Fragment>
      ))}
    </ReactMapGL>
   </Layout>
@@ -81,15 +107,12 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          image {
-            childImageSharp {
-              fixed(width: 200, height: 125) {
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
           title
-          content
+          location
+          geolocation {
+            lat
+            lng
+          }
         }
       }
     }

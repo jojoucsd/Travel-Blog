@@ -25,6 +25,13 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "articles"
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "geolocation": {
+      "type": "json"
     }
   }
 }
