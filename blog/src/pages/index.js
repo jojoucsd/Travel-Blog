@@ -1,120 +1,69 @@
-import React , {useState, useEffect} from 'react'
-import Layout from '../components/layout'
-import ReactMapGL , { Marker, Popup }from 'react-map-gl'
-import { siteMetadata } from '../../gatsby-config'
-import { Avatar, Badge } from 'antd';
+import React from 'react'
 import { Link, graphql } from 'gatsby'
-import fakeData from 'fakeData'
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Img from 'gatsby-image'
+import Layout from '../components/layout' 
+import ReactMarkdown from "react-markdown"
+import { List , Card, Icon, Avatar } from 'antd'
 
-// import Map from '../components/map'
-
-
-const IndexPage = ({ data }) => {
-  const {allStrapiArticle} = data
-  // const {edges} = allStrapiArticle
-  const {sanFran} = fakeData
-  const [showPopup, setShowPopup] = useState({})
-  const place = 'San Francisco'
-  const [viewport, setViewport] = useState({
-    width: '100vw',
-    height: '100vh',
-    // latitude: 37.7577,
-    // longitude: -95.665,
-    latitude: sanFran.lat,
-    longitude: sanFran.lng,
-    zoom: sanFran.zoom
-  });
-
-  useEffect (() => {
-    //mapbox geocoding
-    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?limit=1&access_token=${siteMetadata.mapboxToken}`)
-    .then(response => response.json())
-    .then(resultData => {
-      let geoCenter = resultData.features[0].center
-      fetch('http://localhost:1337/articles/1',{
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ geolocation: { lat: geoCenter[1] , lng:geoCenter[0]} }),
-        json: true 
-      })
-      .then(response => response.json())
-      .then(resultUpdated=>{
-        console.log(resultUpdated)
-      })
-    }, [])
-  })
-  return(
-  <Layout content={'map'}>
-   <ReactMapGL
-      mapStyle="mapbox://styles/jojoleto/ck6oid21g29it1ir3gbypurj9"
-      mapboxApiAccessToken= {siteMetadata.mapboxToken}
-      {...viewport}
-      onViewportChange={setViewport}
-   >
-         { data.allStrapiArticle.edges.map(document =>(
-      <React.Fragment key={document.node.id}>
-         <Marker
-          latitude={37.7749}
-          longitude= {-122.4194}
-         >
-        <div        
-          onClick={()=>setShowPopup({
-          //...showPopup
-          [document.node.id]:true
-        })}
-        >
-          <Badge count={5} style={{boxShadow:'0 0 0 0'}}>
-            <Avatar style={{ backgroundColor: '#87d068' }} icon="user"/>  
-          </Badge>
-        </div>
-         </Marker>
-         {
-           showPopup[document.node.id]? (
-             <Popup
-             latitude={37.7749}
-             longitude= {-122.4194}
-             closeButton={true}
-             closeOnClick={false}
-             dynamicPosition={true}
-             onClose={()=>setShowPopup({})}
-             anchor="top"
-             >
-              <div className ="popup">
-              <li key={document.node.id}>
-                <h5>
-                <Link to={`/${document.node.id}`}>{document.node.title}</Link>
-                </h5>
-              </li>
-              </div>
-             </Popup>
-           ):null
-         }
-      </React.Fragment>
-     ))}
-   </ReactMapGL>
+const { Meta } = Card; 
+const IndexPage = ({ data }) => (
+    <Layout content={'blog'}>
+    <List
+      grid= {{ gutter: 16, xs:1, sm: 1, md:2, lg: 3, xl:4, xxl: 4,}}
+      dataSource={data.allStrapiArticle.edges}
+      renderItem= {item =>(
+        <List.Item>
+          <Card 
+            style ={{width : 300 }}
+            cover = {
+              <Img fixed={item.node.image.childImageSharp.fixed}/>
+            }
+            actions={[
+              <Icon type="setting" key="setting" />,
+              <Icon type="edit" key="edit" />,
+              <Icon type="ellipsis" key="ellipsis" />,
+            ]}
+            >
+              <Meta
+                avatar={<Avatar style={{ backgroundColor: '#87d068' }} icon="user"/>  }
+                title={item.node.title}
+                style={{height:225}}
+                description={
+                  <ReactMarkdown
+                  source={item.node.content.substring(0,200).concat(" ...")}
+                  transformImageUri={uri => uri.startsWith('http') ? uri: `${process.env.IMAGE_BASE_URL}${uri}`}
+                  className ="indexArticle"
+                  /> 
+                }
+              />
+              <Link style={{float:'right'}} to={`/${item.node.id}`}>Read more</Link>
+          </Card>
+        </List.Item>
+      )}
+      />
+    <Link to="/about/">Go to About Me</Link>
   </Layout>
-)}
-
-export default IndexPage
-
-export const pageQuery = graphql`  
+  )
+  
+  export default IndexPage
+  
+export const query = graphql`  
   query IndexQuery {
-    allStrapiArticle {
-      edges {
-        node {
-          id
-          title
-          location
-          geolocation {
-            lat
-            lng
+      allStrapiArticle {
+        edges {
+          node {
+            id
+            image {
+              childImageSharp {
+                fixed(width: 300, height: 200) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+            title
+            content
           }
         }
       }
-    }
   }
 `

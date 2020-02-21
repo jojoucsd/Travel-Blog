@@ -12,8 +12,8 @@ const mapStyle ={
 }
 const blogStyle={
     margin: `0 auto`,
-    maxWidth: 960,
-    padding: `0 1.0875rem 1.45rem`,
+    maxWidth: 1600,
+    padding: `1.45rem 1.75rem 1.45rem`,
   }
 const Layout = ({ children, content }) => {
   const data = useStaticQuery(graphql`

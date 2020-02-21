@@ -33,17 +33,28 @@ const Header = ({ siteTitle, content }) => (
         >
           {siteTitle}
         </Link>
-        <Button style={{float:'right', backgroundColor:'black', border:'transprent'}}>
+        <Button style={{float:'right', backgroundColor:'black', border:'transprent', marginRight:'15px', left:'10px'}}>
+          <Link
+            to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+          >
+            Blog
+          </Link>
+        </Button>
+        <Button style={{float:'right', backgroundColor:'black', border:'transprent',}}>
         <Link
-          to="/blog"
+          to="/map"
           style={{
             color: `white`,
             textDecoration: `none`,
           }}
         >
-          Blog Posts
-        </Link>
-      </Button>
+          Map
+          </Link>
+        </Button>
       </h1>
     </div>
   </header>
