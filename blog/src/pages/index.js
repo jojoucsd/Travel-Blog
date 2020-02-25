@@ -70,6 +70,8 @@ export const query = graphql`
             }
             title
             content
+            location
+            isGeo
           }
         }
       }

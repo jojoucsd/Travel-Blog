@@ -25,11 +25,11 @@ const MapPage = ({ data }) => {
     longitude: sanFran.lng,
     zoom: sanFran.zoom
   });
-
-  // const addGeoData = edges.filter(article => article.node.isGeo !== true)
-  // useEffect (() => {
-  //   if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
-  // })
+  console.log('map', edges)
+  useEffect (() => {
+    // if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
+    // edges.map(article => Geolocation(article.node))
+  })
 
   return(
   <Layout content={'map'}>
@@ -39,11 +39,11 @@ const MapPage = ({ data }) => {
       {...viewport}
       onViewportChange={setViewport}
    >
-         { data.allStrapiArticle.edges.map(document =>(
+         { edges.map(document => console.log(document) || (
       <React.Fragment key={document.node.id}>
          <Marker
-          latitude={37.7749}
-          longitude= {-122.4194}
+          latitude={document.node.geolocation.lat}
+          longitude= {document.node.geolocation.lng}
          >
         <div        
           onClick={()=>setShowPopup({
@@ -59,8 +59,8 @@ const MapPage = ({ data }) => {
          {
            showPopup[document.node.id]? (
              <Popup
-             latitude={37.7749}
-             longitude= {-122.4194}
+             latitude={document.node.geolocation.lat}
+             longitude= {document.node.geolocation.lng}
              closeButton={true}
              closeOnClick={false}
              dynamicPosition={true}
