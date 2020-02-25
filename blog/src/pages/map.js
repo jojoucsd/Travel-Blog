@@ -2,20 +2,20 @@ import React , {useState, useEffect} from 'react'
 import Layout from '../components/layout'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
-import { Avatar, Badge } from 'antd';
+import { Avatar, Badge } from 'antd'
 import { Link, graphql } from 'gatsby'
 import fakeData from 'fakeData'
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Geolocation from '../util/geoLocation'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 // import Map from '../components/map'
 
 
 const MapPage = ({ data }) => {
   const {allStrapiArticle} = data
-  // const {edges} = allStrapiArticle
+  const {edges} = allStrapiArticle
   const {sanFran} = fakeData
   const [showPopup, setShowPopup] = useState({})
-  const place = 'San Francisco'
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -26,27 +26,11 @@ const MapPage = ({ data }) => {
     zoom: sanFran.zoom
   });
 
-  useEffect (() => {
-    //mapbox geocoding
-    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?limit=1&access_token=${siteMetadata.mapboxToken}`)
-    .then(response => response.json())
-    .then(resultData => {
-      let geoCenter = resultData.features[0].center
-      fetch('http://localhost:1337/articles/1',{
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ geolocation: { lat: geoCenter[1] , lng:geoCenter[0]} }),
-        json: true 
-      })
-      .then(response => response.json())
-      .then(resultUpdated=>{
-        console.log(resultUpdated)
-      })
-    }, [])
-  })
+  // const addGeoData = edges.filter(article => article.node.isGeo !== true)
+  // useEffect (() => {
+  //   if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
+  // })
+
   return(
   <Layout content={'map'}>
    <ReactMapGL
@@ -108,6 +92,8 @@ export const pageQuery = graphql`
         node {
           id
           title
+          location
+          isGeo
           geolocation {
             lat
             lng

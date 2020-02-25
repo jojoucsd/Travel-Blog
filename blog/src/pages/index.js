@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Layout from '../components/layout' 
 import ReactMarkdown from "react-markdown"
 import { List , Card, Icon, Avatar } from 'antd'
+import Geolocation from '../util/geoLocation'
 
 const { Meta } = Card; 
-const IndexPage = ({ data }) => (
+const IndexPage = ({ data }) => {
+  const {allStrapiArticle} = data
+  const {edges} = allStrapiArticle
+  const addGeoData = edges.filter(article => article.node.isGeo !== true)
+  useEffect (() => {
+    if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
+  })
+return(
     <Layout content={'blog'}>
     <List
       grid= {{ gutter: 16, xs:1, sm: 1, md:2, lg: 3, xl:4, xxl: 4,}}
@@ -43,7 +51,7 @@ const IndexPage = ({ data }) => (
       />
     <Link to="/about/">Go to About Me</Link>
   </Layout>
-  )
+  )}
   
   export default IndexPage
   

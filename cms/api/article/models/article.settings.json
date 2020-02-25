@@ -32,6 +32,10 @@
     },
     "geolocation": {
       "type": "json"
+    },
+    "isGeo": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

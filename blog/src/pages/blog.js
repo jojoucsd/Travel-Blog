@@ -44,6 +44,11 @@ export const query = graphql`
             }
             title
             content
+            isGeo
+            geolocation {
+              lat
+              lng
+            }
           }
         }
       }
