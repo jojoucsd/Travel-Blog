@@ -5,7 +5,6 @@ import { siteMetadata } from '../../gatsby-config'
 import { Avatar, Badge } from 'antd'
 import { Link, graphql } from 'gatsby'
 import fakeData from 'fakeData'
-import Geolocation from '../util/geoLocation'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 // import Map from '../components/map'
@@ -25,7 +24,6 @@ const MapPage = ({ data }) => {
     longitude: sanFran.lng,
     zoom: sanFran.zoom
   });
-  console.log('map', edges)
   useEffect (() => {
     // if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
     // edges.map(article => Geolocation(article.node))
@@ -39,17 +37,20 @@ const MapPage = ({ data }) => {
       {...viewport}
       onViewportChange={setViewport}
    >
-         { edges.map(document => console.log(document) || (
+         { edges.map(document => (
       <React.Fragment key={document.node.id}>
          <Marker
           latitude={document.node.geolocation.lat}
           longitude= {document.node.geolocation.lng}
          >
-        <div        
+        <div
+          role="button"
+          tabIndex={0}      
           onClick={()=>setShowPopup({
           //...showPopup
           [document.node.id]:true
         })}
+          onKeyDown={()=>{}}
         >
           <Badge count={5} style={{boxShadow:'0 0 0 0'}}>
             <Avatar style={{ backgroundColor: '#87d068' }} icon="user"/>  

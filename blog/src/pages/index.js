@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react'
+import Moment from 'react-moment'
+import "moment-timezone"
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Layout from '../components/layout' 
@@ -14,6 +16,8 @@ const IndexPage = ({ data }) => {
   useEffect (() => {
     if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
   })
+  
+  edges.map(node=> console.log(node.node.created_at))
 return(
     <Layout content={'blog'}>
     <List
@@ -27,9 +31,9 @@ return(
               <Img fixed={item.node.image.childImageSharp.fixed}/>
             }
             actions={[
-              <Icon type="setting" key="setting" />,
-              <Icon type="edit" key="edit" />,
-              <Icon type="ellipsis" key="ellipsis" />,
+              <Moment format="MM/DD/YYYY">{item.node.created_at}</Moment>,
+              <Moment fromNow>{item.node.created_at}</Moment>,
+              <Icon type="heart" key="heart" />,
             ]}
             >
               <Meta
@@ -72,6 +76,7 @@ export const query = graphql`
             content
             location
             isGeo
+            created_at(difference: "", formatString: "", fromNow: false, locale: "")
           }
         }
       }
