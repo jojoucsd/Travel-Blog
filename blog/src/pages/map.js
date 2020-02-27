@@ -1,12 +1,12 @@
-import React , {useState, useEffect} from 'react'
+import React , {useState} from 'react'
 import Layout from '../components/layout'
+import CardComponent from '../components/cardComponent'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
-import { Avatar, Badge } from 'antd'
-import { Link, graphql } from 'gatsby'
+import { Avatar } from 'antd'
 import fakeData from 'fakeData'
 import 'mapbox-gl/dist/mapbox-gl.css'
-
+import '../styles/global.css'
 // import Map from '../components/map'
 
 
@@ -24,10 +24,10 @@ const MapPage = ({ data }) => {
     longitude: sanFran.lng,
     zoom: sanFran.zoom
   });
-  useEffect (() => {
-    // if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
-    // edges.map(article => Geolocation(article.node))
-  })
+
+  const checkSrc = (string) =>{
+    return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`
+  }
 
   return(
   <Layout content={'map'}>
@@ -36,6 +36,7 @@ const MapPage = ({ data }) => {
       mapboxApiAccessToken= {siteMetadata.mapboxToken}
       {...viewport}
       onViewportChange={setViewport}
+      onClick= {() =>setShowPopup({})}
    >
          { edges.map(document => (
       <React.Fragment key={document.node.id}>
@@ -52,9 +53,7 @@ const MapPage = ({ data }) => {
         })}
           onKeyDown={()=>{}}
         >
-          <Badge count={5} style={{boxShadow:'0 0 0 0'}}>
-            <Avatar style={{ backgroundColor: '#87d068' }} icon="user"/>  
-          </Badge>
+            <Avatar src={checkSrc(document.node.author.avatar.url)}/>  
         </div>
          </Marker>
          {
@@ -63,17 +62,13 @@ const MapPage = ({ data }) => {
              latitude={document.node.geolocation.lat}
              longitude= {document.node.geolocation.lng}
              closeButton={true}
-             closeOnClick={false}
+             closeOnClick={true}
              dynamicPosition={true}
              onClose={()=>setShowPopup({})}
              anchor="top"
              >
               <div className ="popup">
-              <li key={document.node.id}>
-                <h5>
-                <Link to={`/${document.node.id}`}>{document.node.title}</Link>
-                </h5>
-              </li>
+                <CardComponent data={document} width={{width:300}} height={{}} showDescription={false} />
               </div>
              </Popup>
            ):null
@@ -98,6 +93,21 @@ export const pageQuery = graphql`
           geolocation {
             lat
             lng
+          }
+          image {
+            childImageSharp {
+              fixed(width: 300, height: 200) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
+          content
+          created_at(difference: "", formatString: "", fromNow: false, locale: "")
+          travelDate(difference: "", formatString: "", fromNow: false, locale: "")
+          author{
+            avatar{
+              url
+            }
           }
         }
       }

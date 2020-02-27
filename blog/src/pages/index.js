@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react'
-import Moment from 'react-moment'
 import "moment-timezone"
 import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import Layout from '../components/layout' 
-import ReactMarkdown from "react-markdown"
-import { List , Card, Icon, Avatar } from 'antd'
+import { List } from 'antd'
+import CardComponent from '../components/cardComponent'
 import Geolocation from '../util/geoLocation'
 
-const { Meta } = Card; 
 const IndexPage = ({ data }) => {
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
@@ -16,8 +13,6 @@ const IndexPage = ({ data }) => {
   useEffect (() => {
     if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
   })
-  
-  edges.map(node=> console.log(node.node.created_at))
 return(
     <Layout content={'blog'}>
     <List
@@ -25,31 +20,7 @@ return(
       dataSource={data.allStrapiArticle.edges}
       renderItem= {item =>(
         <List.Item>
-          <Card 
-            style ={{width : 300 }}
-            cover = {
-              <Img fixed={item.node.image.childImageSharp.fixed}/>
-            }
-            actions={[
-              <Moment format="MM/DD/YYYY">{item.node.created_at}</Moment>,
-              <Moment fromNow>{item.node.created_at}</Moment>,
-              <Icon type="heart" key="heart" />,
-            ]}
-            >
-              <Meta
-                avatar={<Avatar style={{ backgroundColor: '#87d068' }} icon="user"/>  }
-                title={item.node.title}
-                style={{height:225}}
-                description={
-                  <ReactMarkdown
-                  source={item.node.content.substring(0,200).concat(" ...")}
-                  transformImageUri={uri => uri.startsWith('http') ? uri: `${process.env.IMAGE_BASE_URL}${uri}`}
-                  className ="indexArticle"
-                  /> 
-                }
-              />
-              <Link style={{float:'right'}} to={`/${item.node.id}`}>Read more</Link>
-          </Card>
+          <CardComponent data={item} width={{width:300}} height={{height:225}} showDescription={true} />
         </List.Item>
       )}
       />
@@ -77,6 +48,12 @@ export const query = graphql`
             location
             isGeo
             created_at(difference: "", formatString: "", fromNow: false, locale: "")
+            travelDate(difference: "", formatString: "", fromNow: false, locale: "")
+            author{
+              avatar {
+                url
+              }
+            }
           }
         }
       }

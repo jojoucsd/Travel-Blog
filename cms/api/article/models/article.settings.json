@@ -36,6 +36,9 @@
     "isGeo": {
       "type": "boolean",
       "default": false
+    },
+    "travelDate": {
+      "type": "date"
     }
   }
 }
