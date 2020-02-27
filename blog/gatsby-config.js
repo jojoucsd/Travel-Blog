@@ -4,7 +4,7 @@ module.exports = {
     title: `Ling's Travel Blog`,
     description: `Travel Blog build with Gatsby frontend and Strapi backend`,
     author: `@LingLu`,
-    mapboxToken: process.env.MAPBOX_API_TOKEN ? process.env.production.MAPBOX_API_TOKEN: process.env.MAPBOX_API_TOKEN
+    mapboxToken: process.env.GATSBY_MAPBOX_TOKEN 
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
