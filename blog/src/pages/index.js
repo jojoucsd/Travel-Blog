@@ -47,8 +47,8 @@ export const query = graphql`
             content
             location
             isGeo
-            created_at(difference: "", formatString: "", fromNow: false, locale: "")
-            travelDate(difference: "", formatString: "", fromNow: false, locale: "")
+            created_at
+            travelDate
             author{
               avatar {
                 url

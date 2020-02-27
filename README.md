@@ -9,5 +9,3 @@
 4. family tree
 
 ```git subtree push --prefix cms heroku master```  push cms for heroku
-
-strapi bug sucks

@@ -4,7 +4,8 @@ import CardComponent from '../components/cardComponent'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
 import { Avatar } from 'antd'
-import fakeData from 'fakeData'
+// import fakeData from 'fakeData'
+import { graphql } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '../styles/global.css'
 // import Map from '../components/map'
@@ -13,16 +14,17 @@ import '../styles/global.css'
 const MapPage = ({ data }) => {
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
-  const {sanFran} = fakeData
+  // const {sanFran} = fakeData
   const [showPopup, setShowPopup] = useState({})
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
-    // latitude: 37.7577,
-    // longitude: -95.665,
-    latitude: sanFran.lat,
-    longitude: sanFran.lng,
-    zoom: sanFran.zoom
+    latitude: 37.2294,
+    longitude: -119.5094,
+    zoom: 6.5, 
+    // latitude: sanFran.lat,
+    // longitude: sanFran.lng,
+    // zoom: sanFran.zoom
   });
 
   const checkSrc = (string) =>{
@@ -102,8 +104,8 @@ export const pageQuery = graphql`
             }
           }
           content
-          created_at(difference: "", formatString: "", fromNow: false, locale: "")
-          travelDate(difference: "", formatString: "", fromNow: false, locale: "")
+          created_at
+          travelDate
           author{
             avatar{
               url
