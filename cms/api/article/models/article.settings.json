@@ -28,7 +28,7 @@
     },
     "location": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "geolocation": {
       "type": "json"
