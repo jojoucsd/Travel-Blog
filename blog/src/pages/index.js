@@ -51,7 +51,11 @@ export const query = graphql`
             travelDate
             author{
               avatar {
-                url
+                childImageSharp {
+                  fixed {
+                    ...GatsbyImageSharpFixed
+                  }
+                }
               }
             }
           }

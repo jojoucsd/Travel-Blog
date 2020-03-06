@@ -4,7 +4,12 @@ import Img from 'gatsby-image'
 import Layout from '../components/layout' 
 import ReactMarkdown from "react-markdown"
 
-const ArticleTemplate = ({ data }) => (
+const ArticleTemplate = ({ data }) => {
+
+  console.log("template", data.strapiArticle.images[0])
+  console.log("image", data.strapiArticle.image)
+
+  return (
   <Layout>
     <h1>{data.strapiArticle.title}</h1>
     <p>by <Link to={`/authors/User_${data.strapiArticle.author.id}`}>{data.strapiArticle.author.username}</Link></p>
@@ -17,6 +22,7 @@ const ArticleTemplate = ({ data }) => (
     />
   </Layout>
 )
+}
 
 export default ArticleTemplate
 
@@ -35,6 +41,9 @@ export const query = graphql`
       author {
         id
         username
+      }
+      images {
+        id
       }
     }
   }

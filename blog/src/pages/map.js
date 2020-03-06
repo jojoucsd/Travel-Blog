@@ -55,7 +55,7 @@ const MapPage = ({ data }) => {
         })}
           onKeyDown={()=>{}}
         >
-            <Avatar src={checkSrc(document.node.author.avatar.url)}/>  
+            <Avatar src={checkSrc(document.node.author.avatar.childImageSharp.fixed.src)}/>  
         </div>
          </Marker>
          {
@@ -64,7 +64,7 @@ const MapPage = ({ data }) => {
              latitude={document.node.geolocation.lat}
              longitude= {document.node.geolocation.lng}
              closeButton={true}
-             closeOnClick={true}
+             closeOnClick={false}
              dynamicPosition={true}
              onClose={()=>setShowPopup({})}
              anchor="top"
@@ -108,7 +108,11 @@ export const pageQuery = graphql`
           travelDate
           author{
             avatar{
-              url
+              childImageSharp {
+                fixed {
+                  ...GatsbyImageSharpFixed
+                }
+              }
             }
           }
         }

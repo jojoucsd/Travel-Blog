@@ -41,7 +41,7 @@ const Map = () =>{
             })
         })
         }else{
-            setShowPopup({[1] : true})
+            setShowPopup({isOpen:true})
             setViewport({
                 ...viewport,
                 longitude: event.lngLat[0],
@@ -77,7 +77,7 @@ const Map = () =>{
         </Source>
 
         {
-         showPopup[1] ?(
+         showPopup.isOpen ?(
              <Popup
              latitude={viewport.latitude}
              longitude={viewport.longitude}

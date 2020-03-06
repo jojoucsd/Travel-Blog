@@ -25,7 +25,9 @@ const CardComponent = (data) => {
             >
             <Link to={`/${data.data.node.id}`}>
                 <Meta
-                avatar={<Avatar src={checkSrc(data.data.node.author.avatar.url)}/>  }
+                avatar={
+                <Avatar src={checkSrc(data.data.node.author.avatar.childImageSharp.fixed.src)}/>
+                }
                 title={data.data.node.title}
                 style={data.height}
                 description={ data.showDescription ? 
