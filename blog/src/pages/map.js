@@ -4,7 +4,6 @@ import CardComponent from '../components/cardComponent'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
 import { Avatar } from 'antd'
-// import fakeData from 'fakeData'
 import { graphql } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '../styles/global.css'
@@ -14,7 +13,6 @@ import '../styles/global.css'
 const MapPage = ({ data }) => {
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
-  // const {sanFran} = fakeData
   const [showPopup, setShowPopup] = useState({})
   const [viewport, setViewport] = useState({
     width: '100vw',
@@ -22,9 +20,6 @@ const MapPage = ({ data }) => {
     latitude: 37.2294,
     longitude: -119.5094,
     zoom: 6.5, 
-    // latitude: sanFran.lat,
-    // longitude: sanFran.lng,
-    // zoom: sanFran.zoom
   });
 
   const checkSrc = (string) =>{
@@ -96,10 +91,12 @@ export const pageQuery = graphql`
             lat
             lng
           }
-          image {
-            childImageSharp {
-              fixed(width: 300, height: 200) {
-                ...GatsbyImageSharpFixed
+          cover {
+            localFile{
+              childImageSharp {
+                fixed(width: 300, height: 200) {
+                  ...GatsbyImageSharpFixed
+                }
               }
             }
           }

@@ -36,10 +36,12 @@ export const query = graphql`
         edges {
           node {
             id
-            image {
-              childImageSharp {
-                fixed(width: 300, height: 200) {
-                  ...GatsbyImageSharpFixed
+            cover {
+              localFile{
+                childImageSharp {
+                  fixed(width: 300, height: 200) {
+                    ...GatsbyImageSharpFixed
+                  }
                 }
               }
             }
