@@ -29,6 +29,7 @@ module.exports = {
       }
     },
     'gatsby-plugin-antd',
+    `gatsby-plugin-emotion`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

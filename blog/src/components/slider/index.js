@@ -2,8 +2,8 @@ import React, {useState, createRef} from 'react'
 import Img from 'gatsby-image'
 import { Row, Col, Button } from 'antd'
 import { Carousel, Icon } from 'antd'
-import "../styles/global.css"
-
+import StyledSlider from './styledSlider'
+//add proptype
 
 const Slider = (data) =>{
     const covers = data.data
@@ -33,6 +33,7 @@ const Slider = (data) =>{
         return (
             <li
             id={i}
+            onKeyDown={()=>{}}
             onClick={handleGoTo}
             className={i === activeIndex ? 'active' : ''}
             key={i}
@@ -43,6 +44,7 @@ const Slider = (data) =>{
     })
     return(
         <React.Fragment>
+            <StyledSlider/>
             <Row>
              <Col span={19}>
              <Carousel
@@ -58,8 +60,10 @@ const Slider = (data) =>{
             </div>   
             ))}
             </Carousel>
+            <div className="carousel-controls">
             <Button className="sliderButton" type="primary"  value ="large"  onClick={handlePrev}><Icon type="left"/></Button>
             <Button className="sliderButton" type="primary" value="large" onClick={handleNext}><Icon type="right"/></Button>
+             </div>
              </Col>
              <Col span={5}>
                 <ol className="indicators">{indicators}</ol>
