@@ -1,27 +1,18 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Link, graphql } from 'gatsby'
-// import Img from 'gatsby-image'
 import { Row, Col } from 'antd'
 import Slider from '../components/slider'
-import { siteMetadata } from '../../gatsby-config'
 import Layout from '../components/layout' 
 import ReactMarkdown from "react-markdown"
-import ReactMapGL from 'react-map-gl'
+import Map from "../components/map"
 import styled from "@emotion/styled"
 
 const ArticleTemplate = ({ data }) => {
   const covers = data.strapiArticle.cover
-  const geo = data.strapiArticle.geolocation
+  const geoCenter = data.strapiArticle.geolocation
   const StyledMarkDown = styled.div`
     margin: 2rem;
-  `
-  const [viewport, setViewport] = useState({
-    width: '510px',
-    height: '600px',
-    latitude: geo.lat,
-    longitude: geo.lng,
-    zoom: 8, 
-  })
+    `
   return (
   <Layout>
     <Row>
@@ -43,12 +34,7 @@ const ArticleTemplate = ({ data }) => {
         </StyledMarkDown>
       </Col>
       <Col span= {8}>
-       <ReactMapGL
-          mapStyle="mapbox://styles/jojoleto/ck6oid21g29it1ir3gbypurj9"
-          mapboxApiAccessToken= {siteMetadata.mapboxToken}
-          {...viewport}
-          onViewportChange={setViewport}
-          /> 
+        <Map geoCenter={geoCenter} style={{width: '510px', height:'600px', zoom:8}}/>
       </Col>
     </Row>
   </Layout>

@@ -14,7 +14,7 @@ export default ({children}) => (
                 width: ${sizes.slider.indicators.size};
                 padding: 0;
                 margin-bottom: auto;
-                li {
+                li{
                     display: block;
                     width: 100%;
                     margin-bottom: ${sizes.margin * 5}px;

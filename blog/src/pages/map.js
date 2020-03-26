@@ -65,7 +65,7 @@ const MapPage = ({ data }) => {
              anchor="top"
              >
               <div className ="popup">
-                <CardComponent data={document} width={{width:300}} height={{}} showDescription={false} />
+                <CardComponent data={document} styles= {{width: '300px', height:'auto'}} showDescription={false} />
               </div>
              </Popup>
            ):null

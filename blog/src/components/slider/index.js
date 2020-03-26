@@ -37,6 +37,7 @@ const Slider = (data) =>{
             onClick={handleGoTo}
             className={i === activeIndex ? 'active' : ''}
             key={i}
+            role='presentation'
             >
             <Img fluid={cover.localFile.childImageSharp.fluid}/>
             </li>

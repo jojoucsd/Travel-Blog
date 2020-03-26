@@ -20,7 +20,7 @@ return(
       dataSource={data.allStrapiArticle.edges}
       renderItem= {item =>(
         <List.Item>
-          <CardComponent data={item} width={{width:300}} height={{height:225}} showDescription={true} />
+          <CardComponent data={item} styles={{width:"300px", height:"225px"}} showDescription={true} />
         </List.Item>
       )}
       />
