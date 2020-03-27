@@ -35,7 +35,6 @@ const Map = ({geoCenter, style}) =>{
         mapboxApiAccessToken= {mapboxToken}
         {...viewport}
         onViewportChange={setViewport}
-        // onClick = {onClick}
      >
        {
          <React.Fragment>

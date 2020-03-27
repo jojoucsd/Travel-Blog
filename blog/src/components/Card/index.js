@@ -5,13 +5,12 @@ import Moment from 'react-moment'
 import "moment-timezone"
 import ReactMarkdown from "react-markdown"
 import { Link } from 'gatsby'
-import placeholder from '../images/ooops.png'
+import placeholder from '../../images/ooops.png'
 
 const { Meta } = Card
 
 const CardComponent = ({data, styles, showDescription}) => {
     const {node} = data
-    console.log(styles)
     const coverImage = node.cover[0].localFile.childImageSharp.fixed || placeholder
     const checkSrc = (string) =>{
         return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`
@@ -23,8 +22,8 @@ const CardComponent = ({data, styles, showDescription}) => {
                 <Img fixed={coverImage}/>
             }
             actions={[
-                <p>Travel : <Moment format="MM/DD/YYYY">{node.travelDate}</Moment> </p>,
-                <p>Publish : <Moment fromNow>{node.created_at}</Moment> </p>,
+                <p>Travel : <Moment format="MM/DD/YYYY">{node.travelDate}</Moment></p>,
+                <p>Publish : <Moment fromNow>{node.created_at}</Moment></p>,
             ]}
             >
             <Link to={`/${node.id}`}>

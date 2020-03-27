@@ -27,8 +27,7 @@ const GeoLocation = async (data) => {
           })
           .then(response => response.json())
           .then(result => result)
-    // console.log(updateStrapi)
-    return updateStrapi
+          return Promise.resolve(updateStrapi)
 }
 
 export default GeoLocation

@@ -1,13 +1,14 @@
 import React , {useState} from 'react'
 import Layout from '../components/layout'
-import CardComponent from '../components/cardComponent'
+import Card from '../components/Card'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 import { siteMetadata } from '../../gatsby-config'
 import { Avatar } from 'antd'
 import { graphql } from 'gatsby'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '../styles/global.css'
-// import Map from '../components/map'
+
+//this should do it as cluster map
 
 
 const MapPage = ({ data }) => {
@@ -65,7 +66,7 @@ const MapPage = ({ data }) => {
              anchor="top"
              >
               <div className ="popup">
-                <CardComponent data={document} styles= {{width: '300px', height:'auto'}} showDescription={false} />
+                <Card data={document} styles= {{width: '300px', height:'auto'}} showDescription={false} />
               </div>
              </Popup>
            ):null

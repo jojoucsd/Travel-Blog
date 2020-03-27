@@ -3,24 +3,38 @@ import "moment-timezone"
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout' 
 import { List } from 'antd'
-import CardComponent from '../components/cardComponent'
-import Geolocation from '../util/geoLocation'
+import Card from '../components/Card'
+import Geolocation from '../APIs/geoLocation'
 
 const IndexPage = ({ data }) => {
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
+
   const addGeoData = edges.filter(article => article.node.isGeo !== true)
+
   useEffect (() => {
-    if (addGeoData.length > 0) addGeoData.map(article => Geolocation(article.node))
+    if (addGeoData.length > 0) {
+      addGeoData.map(article => Geolocation(article.node).then(result=> console.log(result)
+      //   {
+      //   edges.map(data => {
+      //     if(parseInt(data.node.id.split('_')[1]) === result.id){
+      //       data.node.geolocation = result.geolocation
+      //     }
+      //     return data
+      //   })
+      // }
+      ))
+    }
   })
+
 return(
     <Layout content={'blog'}>
     <List
       grid= {{ gutter: 16, xs:1, sm: 1, md:2, lg: 3, xl:4, xxl: 4,}}
-      dataSource={data.allStrapiArticle.edges}
-      renderItem= {item =>(
+      dataSource={edges}
+      renderItem= {item => (
         <List.Item>
-          <CardComponent data={item} styles={{width:"300px", height:"225px"}} showDescription={true} />
+          <Card data={item} styles={{width:"300px", height:"225px"}} showDescription={true} />
         </List.Item>
       )}
       />
