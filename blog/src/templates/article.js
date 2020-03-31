@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { Row, Col } from 'antd'
-import Slider from '../components/slider'
+import Slider from '../components/slider.js'
 import Layout from '../components/layout' 
 import ReactMarkdown from "react-markdown"
 import Map from "../components/map"

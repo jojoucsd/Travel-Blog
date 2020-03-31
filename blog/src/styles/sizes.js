@@ -3,7 +3,7 @@ const sizes = {
     desktop: '1024px',
     wide: '1280px',
   
-    margin: 10,
+    margin: 9,
     header: {
       height: {
         small: '60px',
@@ -29,7 +29,7 @@ const sizes = {
         size: '68px'
       },
       indicators: {
-        size: '288px'
+        size: '206px'
       }
     },
     input: {

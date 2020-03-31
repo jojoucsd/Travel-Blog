@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
   const {edges} = allStrapiArticle
 
   const addGeoData = edges.filter(article => article.node.isGeo !== true)
-
+  console.log('hot reload? Index')
   useEffect (() => {
     if (addGeoData.length > 0) {
       addGeoData.map(article => Geolocation(article.node).then(result=> console.log(result)

@@ -1,10 +1,16 @@
 import React, {useState, createRef} from 'react'
 import Img from 'gatsby-image'
-import { Row, Col, Button } from 'antd'
+import { Button } from 'antd'
 import { Carousel, Icon } from 'antd'
-import StyledSlider from './styledSlider'
+import { css } from "@emotion/core"
+import StyledSlider from './styledComponents/styledSlider'
 //add proptype
 
+const indicatorImg = css`
+    width:100%;
+    height:100%;
+    object-fit: fill;
+`
 const Slider = (data) =>{
     const covers = data.data
     const length = covers.length -1 
@@ -39,15 +45,14 @@ const Slider = (data) =>{
             key={i}
             role='presentation'
             >
-            <Img fluid={cover.localFile.childImageSharp.fluid}/>
+            <Img css={indicatorImg} fluid={cover.localFile.childImageSharp.fluid}/>
             </li>
         )
     })
     return(
         <React.Fragment>
             <StyledSlider/>
-            <Row>
-             <Col span={19}>
+            <div className="slider-wrapper">
              <Carousel
                 effect="fade" 
                 dots = {false}
@@ -62,14 +67,11 @@ const Slider = (data) =>{
             ))}
             </Carousel>
             <div className="carousel-controls">
-            <Button className="sliderButton" type="primary"  value ="large"  onClick={handlePrev}><Icon type="left"/></Button>
-            <Button className="sliderButton" type="primary" value="large" onClick={handleNext}><Icon type="right"/></Button>
-             </div>
-             </Col>
-             <Col span={5}>
-                <ol className="indicators">{indicators}</ol>
-             </Col>
-            </Row>
+                <Button className="sliderButton" type="primary"  value ="large"  onClick={handlePrev}><Icon type="left"/></Button>
+                <Button className="sliderButton" type="primary" value="large" onClick={handleNext}><Icon type="right"/></Button>
+            </div>
+            <ol className="indicators">{indicators}</ol>
+            </div>
         </React.Fragment>
     )
 }
