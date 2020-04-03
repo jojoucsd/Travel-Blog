@@ -39,6 +39,26 @@
     },
     "travelDate": {
       "type": "date"
+    },
+    "categorie": {
+      "type": "enumeration",
+      "enum": [
+        "food",
+        "history",
+        "nature",
+        "culture",
+        "tech"
+      ]
+    },
+    "region": {
+      "type": "enumeration",
+      "enum": [
+        "asia",
+        "africa",
+        "europe",
+        "america",
+        "oceania"
+      ]
     }
   }
 }
