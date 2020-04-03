@@ -11,6 +11,10 @@ export default ({children}) => (
               .indicators, .carousel-controls {
                 display: none;
               }
+            .ant-carousel .slick-slider {
+                width: 100%;
+                height: ${sizes.slider.height.large};
+            }
             .indicators {
               position: absolute;
               right: 0;
@@ -52,7 +56,8 @@ export default ({children}) => (
               }
             }
             @media (min-width: ${sizes.tablet}) {
-              .ant-carousel .slick-slide {
+              .ant-carousel .slick-slider {
+                width: 100%;
                 height: ${sizes.slider.height.large};
               }
             }

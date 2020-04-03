@@ -1,7 +1,7 @@
 import React, {useState, createRef} from 'react'
 import Img from 'gatsby-image'
 import { Button } from 'antd'
-import { Carousel, Icon } from 'antd'
+import { Row,Carousel, Icon } from 'antd'
 import { css } from "@emotion/core"
 import StyledSlider from './styledComponents/styledSlider'
 //add proptype
@@ -62,7 +62,7 @@ const Slider = (data) =>{
             >
             {covers.map((cover, i) => (
             <div key ={i}>
-                <Img fluid={cover.localFile.childImageSharp.fluid}/>
+                <Img style={{height:'712px'}} fluid={cover.localFile.childImageSharp.fluid}/>
             </div>   
             ))}
             </Carousel>
