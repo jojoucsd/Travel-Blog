@@ -1,10 +1,10 @@
 import React from 'react'
+import ClusterMap from '../components/Map/cluster.js'
 import Layout from '../components/layout' 
-import Map from '../components/Map/cluster'
 
 const ClusterPage = () => (
   <Layout content="map">
-    <Map />
+    <ClusterMap />
   </Layout>
   )
   
