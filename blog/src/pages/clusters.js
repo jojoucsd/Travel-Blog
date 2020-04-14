@@ -1,5 +1,5 @@
 import React from 'react'
-import Map from '../components/Map/cluster'
+import Map from '../components/cluster'
 import Layout from '../components/layout' 
 
 const ClusterPage = () => (
