@@ -1,3 +1,4 @@
 {
-  "myCustomConfiguration": "This configuration is accessible through strapi.config.environments.development.myCustomConfiguration"
+  "myCustomConfiguration": "This configuration is accessible through strapi.config.environments.development.myCustomConfiguration",
+  "mapboxToken": "pk.eyJ1Ijoiam9qb2xldG8iLCJhIjoiY2s2bnpjc3MzMHp5NjNtczhqb3k5NTZlZCJ9.t2Ci3lNFXRXBN1T8nppEFQ"
 }

@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { Row, Col } from 'antd'
-import Slider from '../components/slider.js'
-import Layout from '../components/layout' 
-import ReactMarkdown from "react-markdown"
-import Map from "../components/map"
 import styled from "@emotion/styled"
+
+import Layout from '../components/layout' 
+import Slider from '../components/slider.js'
+import Map from "../components/map"
+import ReactMarkdown from "react-markdown"
+
+
 
 const ArticleTemplate = ({ data }) => {
   const covers = data.strapiArticle.cover

@@ -1,11 +1,12 @@
 import React from 'react'
-import { Card, Avatar} from 'antd'
+import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Moment from 'react-moment'
 import "moment-timezone"
 import ReactMarkdown from "react-markdown"
-import { Link } from 'gatsby'
 import placeholder from '../../images/ooops.png'
+
+import { Avatar, Card} from 'antd'
 
 const { Meta } = Card
 

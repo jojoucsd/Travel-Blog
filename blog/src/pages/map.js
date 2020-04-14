@@ -1,10 +1,13 @@
-import React , {useState} from 'react'
+import React , {useState, useEffect} from 'react'
+import { graphql } from 'gatsby'
+import ReactMapGL , { Marker, Popup }from 'react-map-gl'
+
 import Layout from '../components/layout'
 import Card from '../components/Card'
-import ReactMapGL , { Marker, Popup }from 'react-map-gl'
-import { siteMetadata } from '../../gatsby-config'
 import { Avatar } from 'antd'
-import { graphql } from 'gatsby'
+import { siteMetadata } from '../../gatsby-config'
+import fetchData from '../APIs/fetchData'
+
 import 'mapbox-gl/dist/mapbox-gl.css'
 import '../styles/global.css'
 
@@ -15,6 +18,7 @@ const MapPage = ({ data }) => {
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
   const [showPopup, setShowPopup] = useState({})
+  const [articles, setArticles] = useState(edges)
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -22,6 +26,21 @@ const MapPage = ({ data }) => {
     longitude: -119.5094,
     zoom: 6.5, 
   });
+  
+  useEffect (() => {
+      fetchData('articles').then(result => setArticles(result))
+  }, [])
+
+    edges.map(data=>{
+      let dataId = data.node.id.split('_')[1]
+      articles.map(article=>{
+        if (dataId === article.id) {
+          data.node.geolocation = article.geolocation
+        }
+        return article
+      })
+      return data
+    })
 
   const checkSrc = (string) =>{
     return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`

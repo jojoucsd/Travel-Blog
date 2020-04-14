@@ -72,7 +72,7 @@ exports.createPages = ({ actions, graphql }) => {
   ])
 };
 
-exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
+exports.onCreateWebpackConfig = ({ actions, stage, loaders, getConfig }) => {
   const config = {
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
@@ -90,6 +90,16 @@ exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
       ],
     }
   }
-
   actions.setWebpackConfig(config)
+
+  if (stage === 'build-javascript') {
+    const cssConfig= getConfig()
+    const miniCssExtractPlugin = cssConfig.plugins.find(
+      plugin => plugin.constructor.name === 'MiniCssExtractPlugin'
+    )
+    if (miniCssExtractPlugin){
+      miniCssExtractPlugin.options.ignoreOrder = true
+    }
+    actions.replaceWebpackConfig(cssConfig)
+  }
 }

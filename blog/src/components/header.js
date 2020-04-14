@@ -1,7 +1,7 @@
+import React from "react"
 import { Link } from "gatsby"
 import { Button } from "antd"
 import PropTypes from "prop-types"
-import React from "react"
 
 const mapStyle ={
   background: `black`,
