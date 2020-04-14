@@ -13,12 +13,12 @@ const { Meta } = Card
 const CardComponent = ({data, styles, showDescription}) => {
     const {node} = data
     const coverImage = node.cover[0].localFile.childImageSharp.fixed || placeholder
-    const checkSrc = (string) =>{
-        console.log('avatar string', string)
-        console.log('process.env', `${process.env.IMAGE_BASE_URL}${string}`)
-        
-        return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`
-      }
+    // const checkSrc = (string) =>{
+    //     console.log('avatar string', string)
+    //     console.log('process.env', `${process.env.IMAGE_BASE_URL}${string}`)
+
+    //     return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`
+    //   }
    return(
         <Card
             style={{width: styles.width}}
@@ -33,7 +33,7 @@ const CardComponent = ({data, styles, showDescription}) => {
             <Link to={`/${node.id}`}>
                 <Meta
                 avatar={
-                <Avatar src={checkSrc(node.author.avatar.childImageSharp.fixed.src)}/>
+                <Avatar src={node.author.avatar.childImageSharp.fixed.src}/>
                 }
                 title={node.title}
                 style={{height: styles.height }}
