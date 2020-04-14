@@ -42,10 +42,6 @@ const MapPage = ({ data }) => {
       return data
     })
 
-  const checkSrc = (string) =>{
-    return string.startsWith('http') ? string : `${process.env.IMAGE_BASE_URL}${string}`
-  }
-
   return(
   <Layout content={'map'}>
    <ReactMapGL
@@ -70,7 +66,7 @@ const MapPage = ({ data }) => {
         })}
           onKeyDown={()=>{}}
         >
-            <Avatar src={checkSrc(document.node.author.avatar.childImageSharp.fixed.src)}/>  
+            <Avatar src={document.node.author.avatar.childImageSharp.fixed.src}/>  
         </div>
          </Marker>
          {
