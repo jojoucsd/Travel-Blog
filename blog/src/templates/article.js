@@ -37,7 +37,11 @@ const ArticleTemplate = ({ data }) => {
         </StyledMarkDown>
       </Col>
       <Col span= {8}>
-        <Map geoCenter={geoCenter} style={{width: '510px', height:'600px', zoom:8}}/>
+        {
+          data.strapiArticle.categorie !== 'tech' ?
+          <Map geoCenter={geoCenter} style={{width: '510px', height:'600px', zoom:8}}/>
+          : <h1>App spec here , new card logic todo</h1>
+        }
       </Col>
     </Row>
   </Layout>
@@ -60,6 +64,7 @@ export const query = graphql`
           }
         }
       }
+      categorie
       geolocation {
         lat
         lng

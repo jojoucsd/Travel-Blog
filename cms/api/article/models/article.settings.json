@@ -44,9 +44,7 @@
       "type": "enumeration",
       "enum": [
         "food",
-        "history",
-        "nature",
-        "culture",
+        "travel",
         "tech"
       ]
     },

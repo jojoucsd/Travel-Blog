@@ -15,6 +15,7 @@ const blogStyle={
     maxWidth: 1600,
     padding: `1.45rem 1.75rem 1.45rem`,
   }
+
 const Layout = ({ children, content }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {

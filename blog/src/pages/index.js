@@ -1,25 +1,49 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/layout' 
 import Card from '../components/Card'
-import { List } from 'antd'
+import Select from '../components/radio'
+import {Col, List } from 'antd'
+
 
 const IndexPage = ({ data }) => {
+  const DATA = ['All', 'Food', 'Travel', 'Tech']
   const {allStrapiArticle} = data
   const {edges} = allStrapiArticle
+  const [value, setValue] = useState('All')
+  const [articles, setArticles] = useState(edges)
+  // console.log('edges categorie', articles)
+
+  const onChange = e => {
+    setValue(e.target.value)
+  }
+  useEffect(() =>{
+    const target = value.toLowerCase()
+    if (target !== 'all'){
+      let result = edges.filter(article => article.node.categorie === target)
+      setArticles(result)
+    }else{
+      setArticles(edges)
+    }
+  },[value])
 
 return(
     <Layout content={'blog'}>
+    <Col span ={4}>
+      <Select value={value} onChange={onChange} data={DATA} title='Categorie' />
+    </Col>
+    <Col span ={20}>
     <List
-      grid= {{ gutter: 16, xs:1, sm: 1, md:2, lg: 3, xl:4, xxl: 4,}}
-      dataSource={edges}
+      grid= {{ gutter: 14, xs:1, sm: 1, md:2, lg: 3, xl:3, xxl: 3,}}
+      dataSource={articles}
       renderItem= {item =>(
         <List.Item>
           <Card data={item} styles={{width:"300px", height:"225px"}} showDescription={true} />
         </List.Item>
       )}
       />
+    </Col>
     <Link to="/about/">Go to About Me</Link>
   </Layout>
   )}
@@ -45,6 +69,7 @@ export const query = graphql`
             content
             created_at
             travelDate
+            categorie
             author{
               avatar {
                 childImageSharp {

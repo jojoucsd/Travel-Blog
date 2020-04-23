@@ -23,7 +23,7 @@ module.exports = {
       })
 
       if (articlesNeedsToGeoTag.length > 0){
-        console.log('success', articlesNeedsToGeoTag)
+        console.log('success')
         let geoCenter
         articlesNeedsToGeoTag.forEach(async (article) => {
           const geoCode = await fetch (`${placeAPI}${article.location}.json?limit=1&access_token=${mapboxToken}`)
@@ -36,6 +36,7 @@ module.exports = {
               geolocation: {lat: geoCode[1] , lng: geoCode[0]}
             }
           )
+          console.log('updateStrapi', updateStrapi)
       })
     }
   }
