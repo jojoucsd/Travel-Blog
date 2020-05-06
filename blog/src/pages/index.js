@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Link, graphql } from 'gatsby'
+import {graphql } from 'gatsby'
 
 import Layout from '../components/layout' 
 import Card from '../components/Card'
@@ -18,20 +18,17 @@ const IndexPage = ({ data }) => {
   const onChange = e => {
     setValue(e.target.value)
   }
+
   useEffect(() =>{
     const target = value.toLowerCase()
-    if (target !== 'all'){
-      let result = edges.filter(article => article.node.categorie === target)
-      setArticles(result)
-    }else{
-      setArticles(edges)
-    }
-  },[value])
+    let result = target === 'all' ? edges : edges.filter(article => article.node.category === target)
+    setArticles(result)
+  },[value, edges])
 
 return(
     <Layout content={'blog'}>
     <Col span ={4}>
-      <Select value={value} onChange={onChange} data={DATA} title='Categorie' />
+      <Select value={value} onChange={onChange} data={DATA} title='Category' />
     </Col>
     <Col span ={20}>
     <List
@@ -44,7 +41,6 @@ return(
       )}
       />
     </Col>
-    <Link to="/about/">Go to About Me</Link>
   </Layout>
   )}
   
@@ -69,7 +65,7 @@ export const query = graphql`
             content
             created_at
             travelDate
-            categorie
+            category
             author{
               avatar {
                 childImageSharp {

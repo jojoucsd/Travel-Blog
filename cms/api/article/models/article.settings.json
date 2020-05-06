@@ -22,9 +22,9 @@
       "required": false
     },
     "author": {
+      "via": "articles",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "articles"
+      "model": "user"
     },
     "location": {
       "type": "string",
@@ -40,7 +40,7 @@
     "travelDate": {
       "type": "date"
     },
-    "categorie": {
+    "category": {
       "type": "enumeration",
       "enum": [
         "food",

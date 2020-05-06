@@ -11,6 +11,9 @@ const blogStyle={
   marginBottom: `1.45rem`,
   }
 
+const buttonsArray = ['Map' , 'Blog', 'About Me']
+const buttonsRoute = ['map' , '/', 'authors/User_1']
+
 const Header = ({ siteTitle, content }) => (
   <header
     style={content === 'map' ? mapStyle: blogStyle}
@@ -33,28 +36,21 @@ const Header = ({ siteTitle, content }) => (
         >
           {siteTitle}
         </Link>
-        <Button style={{float:'right', backgroundColor:'black', border:'transprent', marginRight:'15px', left:'10px'}}>
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            Blog
-          </Link>
-        </Button>
-        <Button style={{float:'right', backgroundColor:'black', border:'transprent',}}>
-        <Link
-          to="/map"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          Map
-          </Link>
-        </Button>
+        {
+          buttonsArray.map((name,i)=>
+            <Button key= {i} style={{float:'right', backgroundColor:'black', border:'transprent', marginRight:'15px', left:'10px'}}>
+            <Link
+              to={buttonsRoute[i]}
+              style={{
+                color: `white`,
+                textDecoration: `none`,
+              }}
+            >
+              {name}
+            </Link>
+          </Button>
+            )
+        }
       </h1>
     </div>
   </header>

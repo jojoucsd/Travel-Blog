@@ -64,7 +64,7 @@ export const query = graphql`
           }
         }
       }
-      categorie
+      category
       geolocation {
         lat
         lng

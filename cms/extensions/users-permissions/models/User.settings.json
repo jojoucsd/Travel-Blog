@@ -54,10 +54,34 @@
       "configurable": false
     },
     "articles": {
-      "via": "author",
-      "collection": "article"
+      "collection": "article",
+      "via": "author"
     },
     "avatar": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "resume": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "skills": {
+      "type": "string"
+    },
+    "aboutMe": {
+      "type": "richtext"
+    },
+    "url": {
+      "type": "string"
+    },
+    "social": {
+      "type": "string"
+    },
+    "socialMedia": {
       "model": "file",
       "via": "related",
       "plugin": "upload",
