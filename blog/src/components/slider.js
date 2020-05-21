@@ -1,7 +1,6 @@
 import React, {useState, createRef} from 'react'
 import Img from 'gatsby-image'
-import { Button } from 'antd'
-import {Carousel, Icon } from 'antd'
+import {Carousel, Icon, Button } from 'antd'
 import { css } from "@emotion/core"
 import StyledSlider from './styledComponents/styledSlider'
 //add proptype

@@ -4,7 +4,7 @@ import {graphql } from 'gatsby'
 import Layout from '../components/layout' 
 import Card from '../components/Card'
 import Select from '../components/radio'
-import {Col, List } from 'antd'
+import {Col, List, Row } from 'antd'
 
 
 const IndexPage = ({ data }) => {
@@ -27,6 +27,7 @@ const IndexPage = ({ data }) => {
 
 return(
     <Layout content={'blog'}>
+    <Row>
     <Col span ={4}>
       <Select value={value} onChange={onChange} data={DATA} title='Category' />
     </Col>
@@ -41,6 +42,7 @@ return(
       )}
       />
     </Col>
+    </Row>
   </Layout>
   )}
   
