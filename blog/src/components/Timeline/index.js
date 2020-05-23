@@ -1,11 +1,12 @@
 import React from 'react'
-import { Timeline, Avatar } from 'antd'
+import { Timeline, Avatar, Typography } from 'antd'
 import { NodeIndexOutlined } from '@ant-design/icons';
 import placeholder from '../../images/ooops.png'
+const { Title } = Typography
 
 const colors = ["red", "volcano", "orange", "gold", "lime", "green", "cyan", "blue", "geekblue", "purple"]
 
-const TimelineComponent = ({data}) =>{
+const TimelineComponent = ({data, title}) =>{
     const sortData = data.sort((a,b) => {return new Date(a.travelDate) - new Date(b.travelDate)})
     const randomColor = () =>{
         return colors[Math.floor(Math.random() * (colors.length - 1))]
@@ -13,6 +14,7 @@ const TimelineComponent = ({data}) =>{
     return(
 
         <>
+        <Title level={2} style={{textAlign:'center'}}>{title}</Title>
         <Timeline mode='alternate'>
          {
         sortData.map((article, i) => 

@@ -1,6 +1,7 @@
 import React from 'react'
-import Img from 'gatsby'
-import {Card} from 'antd'
+import Img from 'gatsby-image'
+import {Button} from 'antd'
+import Tag from '../Tag'
 import './flip.css'
 import placeholder from  '../../images/ooops.png'
 
@@ -26,8 +27,8 @@ import placeholder from  '../../images/ooops.png'
     height: "150px",
     zIndex: "9",
     position: "relative",
-    top: "-85px",
-    left: "65px",
+    top: "-75px",
+    left: "75px",
     right: "0",
     margin: "0 auto",
     border: "10px solid #fff",
@@ -46,14 +47,14 @@ import placeholder from  '../../images/ooops.png'
     width: "100%",
     textAlign: "center",
     position: "relative",
-    top: "-75px"
+    top: "-85px"
   };
   const subTitleStyles = {
     position: "relative",
-    top: "-95px",
+    top: "-75px",
     textAlign: "center",
-    fontWeight: "100",
-    color: "#888"
+    fontWeight: "150",
+    color: "6d6d6d"
   };
   const bioContainerStyles = {
     position: "relative",
@@ -64,16 +65,6 @@ import placeholder from  '../../images/ooops.png'
     padding: "0 30px",
     textAlign: "center"
   };
-  const iconsContainerStyles = {
-    position: "relative",
-    top: "-85px",
-    textAlign: "center"
-  }
-  const iconStyles = {
-    margin: "0 10px",
-    color: "#5C6BC0",
-    fontSize: "24px"
-  }
   const cardBackStyles = {
     height: 500,
     width: 300,
@@ -89,13 +80,16 @@ import placeholder from  '../../images/ooops.png'
     backgroundSize: "cover",
     backgroundPosition: "right"
   }
-  const madeByStyles = {
-    color: "#fff",
-    opacity: ".5",
+  const buttonStyle= {
+    position: "relative",
+    top: "425px",
+    left: "100px",
     textAlign: "center",
-    padding: "0px"
+    fontWeight: "150",
+    color: "6d6d6d",
+    textAlign: "center",
+    borderRadius: "35px"
   }
-  
   const imgStyles = {
     width: 300,
     borderTopRightRadius: 35,
@@ -121,13 +115,14 @@ import placeholder from  '../../images/ooops.png'
     
   }
 
-const FlipCard =({data}) =>{
-
-    const CardImg = (imgSrc) =>(
+const FlipCard =({data, isSocial, isSocialTrue}) =>{
+    console.log('isSocial', isSocial)
+    const CardImg = ({imgSrc}) =>{
+      return(
         <div style={imgContainerStyles} className="imgContainer">
             <img src={imgSrc} className="img" style={imgStyles} />
         </div>
-    )
+    )}
     const CardAvatar = () =>(
             <div style={avatarContainerStyles} className="infoContainer">
                 <img src={data.frontImg.fixed.src || placeholder} style={avatarImgStyles}/>
@@ -139,10 +134,27 @@ const FlipCard =({data}) =>{
         <h4 style={subTitleStyles} className="subTitle">{data.email}</h4>
       </div>
     )
-    const CardBio = ({bio}) => {
+    const CardBio = () => {
         return(
         <div style={bioContainerStyles} className="bioContainer">
-        <p style={bioStyles} className="bio">{bio}</p>
+        <p style={bioStyles} className="bio">{
+          isSocial ? 
+          <Tag 
+          data={data.social} 
+          styles={{
+            marginTop:15,
+            marginBottom: 15,
+            fontSize: 12, 
+          }}/>:
+          <Tag 
+          data={data.skills} 
+          styles={{
+            marginTop:15,
+            marginBottom: 15,
+            fontSize: 12, 
+          }}/> 
+        }
+        </p>
       </div>
     )}
 
@@ -150,13 +162,15 @@ const FlipCard =({data}) =>{
         <div className="flipperContainer">
             <div className="flipper">
                 <div style={cardContainerStyles} className="cardFront cardContainer">
-                    <CardImg imgSrc={"http://1.bp.blogspot.com/-tso_pF4jEdU/UPC4zDXEY6I/AAAAAAAAAhE/Vb2Cd8nRZEo/s1600/a.jpg"}/>
+                    <CardImg imgSrc="https://media.giphy.com/media/Y6pDMTysYTQ2I/giphy.gif"/>
                     <CardAvatar avatarSrc={data.frontImg.fixed.src}/>
                     <CardTitle title={data.userName} subTitle={data.email}/>
-                    <CardBio bio={'something about ling'}/>
+                    <CardBio/>
                 </div> 
                 <div style={cardBackStyles} className="cardBack">
-                    <img className="cardBackImg" style={cardBackImgStyles} src={data.backImg.fixed.src}/>
+                    {/* <img className="cardBackImg" style={cardBackImgStyles} src={data.backImg.fixed.src}/> */}
+                    <Img className="cardBackImg" style={cardBackImgStyles} fixed={data.backImg.fixed}/> 
+                    <Button style={buttonStyle}onClick={isSocialTrue}>{isSocial ? "Academic" : "Social Media"}</Button>
                 </div>
             </div>
         </div>
