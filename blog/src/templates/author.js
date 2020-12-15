@@ -4,7 +4,6 @@ import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import {List, Timeline, Video, Flip} from '../components'
 import {Row, Col, Typography } from 'antd'
-// import { css } from "@emotion/core"
 const { Title } = Typography
 const pdfUrl = "https://drive.google.com/file/d/1GFPnsyn7IqRXDCsWbTIP0WEvc22GWyHI/view?usp=sharing"
 const socialMedia = "This is the social side of me. I like to travel, taking picture, gaming and also right now I am exporing the idea of video editing."
@@ -19,8 +18,8 @@ const UserTemplate = ({ data }) => {
   // const [academicOpacity, setAcademicOpacity] = useState(1)
 
   const flipData = {
-    frontImg : data.strapiUser.avatar.childImageSharp,
-    backImg : data.strapiUser.socialMedia.childImageSharp,
+    frontImg : data.strapiUser.avatar.localFile.childImageSharp,
+    backImg : data.strapiUser.socialMedia.localFile.childImageSharp,
     userName :data.strapiUser.username,
     email :data.strapiUser.email,
     skills:data.strapiUser.skills,
@@ -34,17 +33,6 @@ const UserTemplate = ({ data }) => {
     setAcademic(academicResult)
   }, [articles])
   
-//   let isSocialTrueStyle = css`
-//   opacity: ${socialOpacity}
-// `
-//   let isSocialFalseStyle = css`
-//   opacity: ${academicOpacity}
-//   `
-  // const isSocialFalse = () => {
-  //   setIsSocial(false)
-  //   setSocialOpacity(0.3)
-  //   setAcademicOpacity(1)
-  // }
 
   const isSocialTrue = () => {
     console.log('clicked')
@@ -73,7 +61,7 @@ const UserTemplate = ({ data }) => {
         <Col span={12}>
           {!isSocial ?
             <a href={pdfUrl} target=" ">
-            <Img fixed={data.strapiUser.resume.childImageSharp.fixed}/>
+            <Img fixed={data.strapiUser.resume.localFile.childImageSharp.fixed}/>
             </a> :  <Timeline data={social} title={'Time Line'} />
           }
         </Col>
@@ -102,23 +90,29 @@ export const query = graphql`
       social
       aboutMe
       avatar {
-        childImageSharp {
-          fixed(width: 250, height: 250) {
-            ...GatsbyImageSharpFixed
+        localFile{
+          childImageSharp {
+            fixed(width: 250, height: 250) {
+              ...GatsbyImageSharpFixed
+            }
           }
         }
       }
       socialMedia {
-        childImageSharp {
-          fixed(width: 960){
-            ...GatsbyImageSharpFixed
+        localFile{
+          childImageSharp {
+            fixed(width: 960){
+              ...GatsbyImageSharpFixed
+            }
           }
         }
       }
       resume {
-        childImageSharp{
-          fixed(width: 720, height: 960){
-            ...GatsbyImageSharpFixed
+        localFile{
+          childImageSharp{
+            fixed(width: 720, height: 960){
+              ...GatsbyImageSharpFixed
+            }
           }
         }
       }

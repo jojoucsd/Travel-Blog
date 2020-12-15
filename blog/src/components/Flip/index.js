@@ -115,7 +115,6 @@ import placeholder from  '../../images/ooops.png'
   }
 
 const FlipCard =({data, isSocial, isSocialTrue}) =>{
-    console.log('isSocial', isSocial)
     const CardImg = ({imgSrc}) =>{
       return(
         <div style={imgContainerStyles} className="imgContainer">
