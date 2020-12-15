@@ -7767,10 +7767,18 @@ strapi-helper-plugin@3.2.5:
     styled-components "^5.0.0"
     whatwg-fetch "^3.3.1"
 
-strapi-plugin-content-manager@3.0.0-beta.18.7:
-  version "3.0.0-beta.18.7"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.0.0-beta.18.7.tgz#156c1529397779b22d51e6ffc3ef28c585bff4dc"
+strapi-plugin-content-manager@3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.2.5.tgz#5cbd8befc6f2bdfb841e91cbdf0008971df965fe"
+  integrity sha512-zoH3Jbz9SizZ5ZGnc4ziaTUCB228nINwLlitfithbkrx0m9g8jRbPWpzJvA/H+jthpAFyb9ZxjdAUjIy3oaQvA==
   dependencies:
+    "@buffetjs/core" "3.3.1"
+    "@buffetjs/custom" "3.3.1"
+    "@buffetjs/hooks" "3.3.1"
+    "@buffetjs/icons" "3.3.1"
+    "@buffetjs/styles" "3.3.1"
+    "@buffetjs/utils" "3.3.1"
+    "@sindresorhus/slugify" "1.1.0"
     classnames "^2.2.6"
     codemirror "^5.46.0"
     draft-js "^0.11.5"
