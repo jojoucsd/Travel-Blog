@@ -70,9 +70,11 @@ export const query = graphql`
             category
             author{
               avatar {
-                childImageSharp {
-                  fixed {
-                    ...GatsbyImageSharpFixed
+                localFile{
+                  childImageSharp {
+                    fixed {
+                      ...GatsbyImageSharpFixed
+                    }
                   }
                 }
               }

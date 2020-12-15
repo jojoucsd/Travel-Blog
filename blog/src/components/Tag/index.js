@@ -7,7 +7,7 @@ const TagComponent = ({data, styles}) =>{
         return colors[Math.floor(Math.random() * (colors.length - 1))]
     }
     return (
-        <div className='Skill-Tag'>
+        <span className='Skill-Tag'>
             {
             data.split(',').map((tag, i) => 
             <Tag 
@@ -18,7 +18,7 @@ const TagComponent = ({data, styles}) =>{
             >
             {tag}</Tag>)
             }
-        </div>
+        </span>
     )
 }
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Moment from 'react-moment'
-import "moment-timezone"
 import ReactMarkdown from "react-markdown"
 import placeholder from '../../images/ooops.png'
 
@@ -13,7 +12,6 @@ const { Meta } = Card
 const CardComponent = ({data, styles, showDescription}) => {
     const {node} = data
     const coverImage = node.cover[0].localFile.childImageSharp.fixed || placeholder
-    
    return(
         <Card
             style={{width: styles.width}}
@@ -28,7 +26,7 @@ const CardComponent = ({data, styles, showDescription}) => {
             <Link to={`/${node.id}`}>
                 <Meta
                 avatar={
-                <Avatar src={node.author.avatar.childImageSharp.fixed.src}/>
+                <Avatar src={node.author.avatar.localFile.childImageSharp.fixed.src}/>
                 }
                 title={node.title}
                 style={{height: styles.height }}

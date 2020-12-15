@@ -87,7 +87,6 @@ import placeholder from  '../../images/ooops.png'
     textAlign: "center",
     fontWeight: "150",
     color: "6d6d6d",
-    textAlign: "center",
     borderRadius: "35px"
   }
   const imgStyles = {
@@ -116,16 +115,15 @@ import placeholder from  '../../images/ooops.png'
   }
 
 const FlipCard =({data, isSocial, isSocialTrue}) =>{
-    console.log('isSocial', isSocial)
     const CardImg = ({imgSrc}) =>{
       return(
         <div style={imgContainerStyles} className="imgContainer">
-            <img src={imgSrc} className="img" style={imgStyles} />
+            <img src={imgSrc} className="img" alt={""} style={imgStyles} />
         </div>
     )}
     const CardAvatar = () =>(
             <div style={avatarContainerStyles} className="infoContainer">
-                <img src={data.frontImg.fixed.src || placeholder} style={avatarImgStyles}/>
+                <img src={data.frontImg.fixed.src || placeholder} alt={""} style={avatarImgStyles}/>
             </div>
         )
     const CardTitle = () =>(

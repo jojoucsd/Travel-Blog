@@ -1,5 +1,6 @@
 import React , {useState, useEffect} from 'react'
 import { graphql } from 'gatsby'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import ReactMapGL , { Marker, Popup }from 'react-map-gl'
 
 import Layout from '../components/layout'
@@ -8,7 +9,6 @@ import { Avatar } from 'antd'
 import { siteMetadata } from '../../gatsby-config'
 import fetchData from '../APIs/fetchData'
 
-import 'mapbox-gl/dist/mapbox-gl.css'
 import '../styles/global.css'
 
 //this should do it as cluster map
@@ -45,6 +45,7 @@ const MapPage = ({ data }) => {
   return(
   <Layout content={'map'}>
    <ReactMapGL
+      clasName="mapCanvas"
       mapStyle="mapbox://styles/jojoleto/ck6oid21g29it1ir3gbypurj9"
       mapboxApiAccessToken= {siteMetadata.mapboxToken}
       {...viewport}
@@ -66,7 +67,7 @@ const MapPage = ({ data }) => {
         })}
           onKeyDown={()=>{}}
         >
-            <Avatar src={document.node.author.avatar.childImageSharp.fixed.src}/>  
+            <Avatar src={document.node.author.avatar.localFile.childImageSharp.fixed.src}/>  
         </div>
          </Marker>
          {
@@ -121,9 +122,11 @@ export const pageQuery = graphql`
           travelDate
           author{
             avatar{
-              childImageSharp {
-                fixed {
-                  ...GatsbyImageSharpFixed
+              localFile{
+                childImageSharp {
+                  fixed {
+                    ...GatsbyImageSharpFixed
+                  }
                 }
               }
             }
