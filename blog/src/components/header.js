@@ -12,7 +12,7 @@ const blogStyle={
   }
 
 const buttonsArray = ['Map' , 'Blog', 'About Me']
-const buttonsRoute = ['map' , '/', 'authors/User_1']
+const buttonsRoute = ['/map' , '/', '/authors/User_1']
 
 const Header = ({ siteTitle, content }) => (
   <header

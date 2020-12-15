@@ -5,6 +5,7 @@ import { List } from 'antd'
 import placeholder from '../../images/ooops.png'
 
 const ListComponent = ({data}) =>{
+    console.log(data)
     return (
         <List
         itemLayout="vertical"
